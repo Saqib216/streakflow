@@ -47,6 +47,15 @@ import {
   User 
 } from './firebase';
 
+const withTimeout = <T,>(promise: Promise<T>, timeoutMs: number, errorMessage = "Timeout"): Promise<T> => {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error(errorMessage)), timeoutMs)
+    ),
+  ]);
+};
+
 export default function App() {
   const [goodHabits, setGoodHabits] = useState<GoodHabit[]>([]);
   const [badHabits, setBadHabits] = useState<BadHabit[]>([]);
@@ -55,6 +64,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showImportPrompt, setShowImportPrompt] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const [connectionError, setConnectionError] = useState<string | null>(null);
 
   // Load guest data (fallback or first-run)
   const loadGuestHabits = () => {
@@ -130,9 +140,10 @@ export default function App() {
   // Load from Firestore for logged in user
   const loadUserHabits = async (userId: string) => {
     setIsLoading(true);
+    setConnectionError(null);
     try {
       const gQuery = query(collection(db, "good_habits"), where("userId", "==", userId));
-      const gSnap = await getDocs(gQuery);
+      const gSnap = await withTimeout(getDocs(gQuery), 5000, "Firestore connection timed out");
       const fetchedGood: GoodHabit[] = [];
       gSnap.forEach((doc) => {
         const data = doc.data();
@@ -147,7 +158,7 @@ export default function App() {
       });
 
       const bQuery = query(collection(db, "bad_habits"), where("userId", "==", userId));
-      const bSnap = await getDocs(bQuery);
+      const bSnap = await withTimeout(getDocs(bQuery), 5000, "Firestore connection timed out");
       const fetchedBad: BadHabit[] = [];
       bSnap.forEach((doc) => {
         const data = doc.data();
@@ -166,8 +177,11 @@ export default function App() {
 
       setGoodHabits(fetchedGood);
       setBadHabits(fetchedBad);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error loading habits from Firestore", err);
+      setConnectionError(
+        "Database connection timed out. If you have an Ad-Blocker, Brave Shields, or privacy extension active, it may be blocking Firebase (firestore.googleapis.com). Please disable it for this site and refresh."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -527,6 +541,44 @@ export default function App() {
                 className="text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-zinc-950 px-4 py-2 rounded-xl shadow transition-colors duration-200 cursor-pointer"
               >
                 Sync to Cloud
+              </button>
+            </div>
+          </motion.div>
+        )}
+
+        {connectionError && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-rose-950/10 border border-rose-500/20 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+          >
+            <div className="flex items-start gap-3">
+              <div className="p-2.5 bg-rose-500/10 text-rose-400 rounded-xl shrink-0 mt-0.5">
+                <BadgeAlert size={20} />
+              </div>
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold text-white">Database Connection Blocked</h4>
+                <p className="text-xs text-zinc-300 leading-relaxed">
+                  {connectionError}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2.5 w-full md:w-auto justify-end shrink-0">
+              <button
+                onClick={() => {
+                  if (user) {
+                    loadUserHabits(user.uid);
+                  }
+                }}
+                className="text-xs font-semibold text-zinc-300 hover:text-white px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors duration-200 cursor-pointer"
+              >
+                Retry
+              </button>
+              <button
+                onClick={handleSignOut}
+                className="text-xs font-semibold bg-zinc-100 hover:bg-white text-zinc-950 px-4 py-2 rounded-xl shadow transition-colors duration-200 cursor-pointer"
+              >
+                Use Offline Mode
               </button>
             </div>
           </motion.div>

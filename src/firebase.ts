@@ -31,8 +31,8 @@ googleProvider.setCustomParameters({
   prompt: "select_account"
 });
 
-const databaseId = import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID || "ai-studio-streakflow-1dc3b81f-717f-4735-b124-ff4d0dcdf48a";
-export const db = getFirestore(app, databaseId);
+const databaseId = import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID;
+export const db = databaseId && databaseId !== "(default)" ? getFirestore(app, databaseId) : getFirestore(app);
 
 export { signInWithPopup, signOut, onAuthStateChanged };
 export type { User };
