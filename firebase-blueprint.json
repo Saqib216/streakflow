@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "GoodHabit": {
+      "title": "Good Habit",
+      "description": "A positive habit the user wants to build.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "history": {
+          "type": "array"
+        },
+        "bestStreak": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "name", "createdAt", "userId"]
+    },
+    "BadHabit": {
+      "title": "Bad Habit",
+      "description": "A negative habit the user wants to quit.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lastRelapse": {
+          "type": "string"
+        },
+        "bestStreakSeconds": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "name", "lastRelapse", "createdAt", "userId"]
+    }
+  },
+  "firestore": {
+    "good_habits/{habitId}": {
+      "schema": "GoodHabit",
+      "description": "Collection of good habits"
+    },
+    "bad_habits/{habitId}": {
+      "schema": "BadHabit",
+      "description": "Collection of bad habits"
+    }
+  }
+}

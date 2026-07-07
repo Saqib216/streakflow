@@ -1,0 +1,6 @@
+{
+  "name": "StreakFlow",
+  "description": "A dark-themed habit tracker to build good habits and quit bad ones with live counters, progress metrics, and motivational tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
