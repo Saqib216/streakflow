@@ -6,7 +6,7 @@
 
 StreakFlow is a minimalist, high-contrast habit-tracking application built to help you build positive routines and break unproductive cycles — side by side, in one place. It pairs a fluid dark-themed UI with real-time cloud sync, and lets you start tracking instantly as a guest with zero signup friction.
 
-![StreakFlow](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black) ![Vite](https://img.shields.io/badge/Vite-Build-646CFF?logo=vite&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-Auth%20%2B%20Firestore-FFCA28?logo=firebase&logoColor=black) ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-06B6D4?logo=tailwindcss&logoColor=white) ![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
+![StreakFlow](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black) ![Vite](https://img.shields.io/badge/Vite-Build-646CFF?logo=vite&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-Auth%20%2B%20Firestore-FFCA28?logo=firebase&logoColor=black) ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-06B6D4?logo=tailwindcss&logoColor=white) ![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
 
 ---
 
@@ -113,7 +113,7 @@ npm run dev
 
 ## 🎨 Tech Stack
 
-- **Frontend:** React 18, TypeScript, Vite
+- **Frontend:** React 19, TypeScript, Vite
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion (`motion/react`)
 - **Icons:** Lucide React
