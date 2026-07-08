@@ -463,7 +463,7 @@ export default function App() {
               <div className="h-9 w-28 bg-white/5 rounded-xl animate-pulse" />
             ) : user ? (
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-1.5 md:w-15">
+                <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-1.5 w-fit"  id="sign-in">
                   {user.photoURL ? (
                     <img 
                       src={user.photoURL} 
