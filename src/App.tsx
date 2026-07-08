@@ -226,6 +226,9 @@ export default function App() {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      // Clear any leftover guest data so it doesn't reappear on reload
+      localStorage.removeItem('streakflow_good_habits');
+      localStorage.removeItem('streakflow_bad_habits');
       setGoodHabits([]);
       setBadHabits([]);
     } catch (error) {
