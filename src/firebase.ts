@@ -12,7 +12,7 @@ import {
   onAuthStateChanged,
   User
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -32,7 +32,9 @@ googleProvider.setCustomParameters({
 });
 
 const databaseId = import.meta.env.VITE_FIREBASE_FIRESTORE_DATABASE_ID;
-export const db = databaseId && databaseId !== "(default)" ? getFirestore(app, databaseId) : getFirestore(app);
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+}, databaseId || "(default)");
 
 export { signInWithPopup, signOut, onAuthStateChanged };
 export type { User };
