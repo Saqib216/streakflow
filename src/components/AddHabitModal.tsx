@@ -89,11 +89,10 @@ export const AddHabitModal: React.FC<AddHabitModalProps> = ({
                 setActiveTab('good');
                 setError('');
               }}
-              className={`flex-1 py-4 text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer border-b-2 ${
-                activeTab === 'good'
+              className={`flex-1 py-4 text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer border-b-2 ${activeTab === 'good'
                   ? 'border-emerald-500 text-emerald-400 bg-emerald-500/[0.04]'
                   : 'border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]'
-              }`}
+                }`}
             >
               <ShieldCheck size={14} />
               <span>Good Habit</span>
@@ -105,11 +104,10 @@ export const AddHabitModal: React.FC<AddHabitModalProps> = ({
                 setActiveTab('bad');
                 setError('');
               }}
-              className={`flex-1 py-4 text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer border-b-2 ${
-                activeTab === 'bad'
+              className={`flex-1 py-4 text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer border-b-2 ${activeTab === 'bad'
                   ? 'border-rose-500 text-rose-400 bg-rose-500/[0.04]'
                   : 'border-transparent text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]'
-              }`}
+                }`}
             >
               <Lock size={14} />
               <span>Bad Habit</span>
@@ -119,9 +117,8 @@ export const AddHabitModal: React.FC<AddHabitModalProps> = ({
           {/* Form Content */}
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             <div className="text-center pb-2">
-              <span className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-widest font-sans font-semibold ${
-                activeTab === 'good' ? 'text-emerald-500' : 'text-rose-500'
-              }`}>
+              <span className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-widest font-sans font-semibold ${activeTab === 'good' ? 'text-emerald-500' : 'text-rose-500'
+                }`}>
                 <Sparkles size={11} /> {activeTab === 'good' ? 'Build Routine' : 'Quit Impulse'}
               </span>
               <h2 className="text-lg font-medium font-sans text-white mt-1">
@@ -185,12 +182,13 @@ export const AddHabitModal: React.FC<AddHabitModalProps> = ({
 
             {/* Action Buttons */}
             <div className="flex gap-3 pt-3 justify-end">
+              {/* Close button */}
               <button
-                type="button"
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-400 hover:text-white hover:bg-white/5 transition-colors duration-200 cursor-pointer"
+                className="absolute top-3 right-3 p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 active:bg-white/10 active:scale-90 transition-all duration-200 cursor-pointer z-20 min-w-[40px] min-h-[40px] flex items-center justify-center"
+                aria-label="Close modal"
               >
-                Cancel
+                <X size={20} />
               </button>
               <button
                 type="submit"

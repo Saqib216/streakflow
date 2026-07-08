@@ -226,9 +226,6 @@ export default function App() {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      // Clear any leftover guest data so it doesn't reappear on reload
-      localStorage.removeItem('streakflow_good_habits');
-      localStorage.removeItem('streakflow_bad_habits');
       setGoodHabits([]);
       setBadHabits([]);
     } catch (error) {
@@ -466,7 +463,7 @@ export default function App() {
               <div className="h-9 w-28 bg-white/5 rounded-xl animate-pulse" />
             ) : user ? (
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-1.5 pr-3">
+                <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl p-1.5 md:w-15">
                   {user.photoURL ? (
                     <img 
                       src={user.photoURL} 
