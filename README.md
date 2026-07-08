@@ -135,7 +135,7 @@ Issues and PRs are welcome. If you're proposing a feature, open an issue first s
 
 ## 👨‍💻 Author
 
-**Muhammad Saqib Hussnain** |
+**Muhammad Saqib Hussnain** 
 - [GitHub](https://github.com/Saqib216)
 - [LinkedIn](https://www.linkedin.com/in/saqib-hussnain) 
 - [Instagram](https://instagram.com/itx.saqib.hussnain)
